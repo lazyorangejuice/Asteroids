@@ -17,7 +17,6 @@ def main():
                 return  # Handle events here
         pygame.time.Clock().tick(60)  # Limit to 60 FPS
         dt = pygame.time.Clock().tick(60) / 1000  # Get delta time in seconds
-        print(f"Delta time: {dt:.4f} seconds")  # Log delta time for debugging
     screen.fill("black")  # Clear the screen with black
     pygame.display.flip()  # Update the display
 
