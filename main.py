@@ -12,11 +12,15 @@ def main():
     pygame.time.Clock()
     dt = 0
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)  # Create a player instance at the center of the screen
     while True:
         screen.fill("black")   # Clear the screen with black
-        player.draw(screen)  # Draw the player on the screen
-        player.update(dt)  # Update the player's state based on input
+        for object in drawable:
+            object.draw(screen)  # Draw the objects on the screen
+        updatable.update(dt)  # Update the objects state based on input
         pygame.display.flip()  # Update the display
         log_state()
         for event in pygame.event.get():
