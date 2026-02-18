@@ -16,6 +16,7 @@ def main():
     while True:
         screen.fill("black")   # Clear the screen with black
         player.draw(screen)  # Draw the player on the screen
+        player.update(dt)  # Update the player's state based on input
         pygame.display.flip()  # Update the display
         log_state()
         for event in pygame.event.get():
