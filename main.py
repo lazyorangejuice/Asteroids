@@ -15,6 +15,11 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     pygame.init()
     pygame.time.Clock()
+    pygame.display.set_caption("Asteroids")
+    pygame.font.init()
+    font = pygame.font.SysFont("Arial", 24)
+    score = 0
+       
     dt = 0
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     updatable = pygame.sprite.Group()
@@ -29,8 +34,9 @@ def main():
     Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)  # Create a player instance at the center of the screen
     while True:
-        
         screen.fill("black")   # Clear the screen with black
+        text_surface = font.render(f"{score}", True, (255, 255, 255)) 
+        screen.blit(text_surface, (10, 10))  # Draw the score on the screen
         for object in drawable:
             object.draw(screen)  # Draw the objects on the screen
         updatable.update(dt)  # Update the objects state based on input
@@ -43,6 +49,7 @@ def main():
             for shot in shots:
                 if asteroid.collides_with(shot):
                     log_event("asteroid_shot")
+                    score += 10  # Increase score based on asteroid kind
                     asteroid.split()  # Remove the asteroid from the game and split it into smaller pieces
                     shot.kill()  # Remove the shot from the game
         pygame.display.flip()  # Update the display
