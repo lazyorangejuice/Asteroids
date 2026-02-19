@@ -7,7 +7,7 @@ from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from circleshape import CircleShape
 from logger import log_event
-
+from shot import Shot
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -19,7 +19,9 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
-    asteroids = pygame.sprite.Group() 
+    asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
+    Shot.containers = (shots, updatable, drawable)
     pygame.sprite.Group()  # Create a sprite group for updatable and drawable objects
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable,)  # Create an asteroid field and add it to the group
@@ -37,6 +39,12 @@ def main():
                 log_event("player_hit")
                 print ("game over")
                 sys.exit()
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    log_event("asteroid_shot")
+                    asteroid.kill()  # Remove the asteroid from the game
+                    shot.kill()  # Remove the shot from the game
         pygame.display.flip()  # Update the display
         log_state()
         for event in pygame.event.get():
