@@ -43,7 +43,7 @@ def main():
             for shot in shots:
                 if asteroid.collides_with(shot):
                     log_event("asteroid_shot")
-                    asteroid.kill()  # Remove the asteroid from the game
+                    asteroid.split()  # Remove the asteroid from the game and split it into smaller pieces
                     shot.kill()  # Remove the shot from the game
         pygame.display.flip()  # Update the display
         log_state()
