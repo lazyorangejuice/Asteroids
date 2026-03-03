@@ -2,10 +2,11 @@ from constants import *
 from circleshape import CircleShape
 from shot import Shot
 import pygame
+from path_finder import resource_path
 
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-SPRITE_IMAGE = pygame.image.load("player sprite 2.png").convert_alpha()
+SPRITE_IMAGE = pygame.image.load(resource_path("assets/player sprite 2.png")).convert_alpha()
 SCALED_SPRITE = pygame.transform.scale(SPRITE_IMAGE, (PLAYER_RADIUS * 4, PLAYER_RADIUS * 4))
 ogrotated_image = pygame.transform.rotate(SCALED_SPRITE, 135)
 

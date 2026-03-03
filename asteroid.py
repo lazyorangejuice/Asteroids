@@ -3,11 +3,12 @@ from constants import *
 import pygame
 from logger import log_event
 import random
+from path_finder import resource_path
 
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-ASTEROID_1_IMAGE = pygame.image.load("asteroid 2 sprite 2.png").convert_alpha()
-ASTEROID_2_IMAGE = pygame.image.load("asteroid sprite 2.png").convert_alpha()
+ASTEROID_1_IMAGE = pygame.image.load(resource_path("assets/asteroid 2 sprite 2.png")).convert_alpha()
+ASTEROID_2_IMAGE = pygame.image.load(resource_path("assets/asteroid sprite 2.png")).convert_alpha()
 
 class Asteroid(CircleShape):
     def __init__(self, x, y, radius):
